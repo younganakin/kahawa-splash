@@ -1,0 +1,20 @@
+body {
+    font-family: 'Lora', sans-serif;
+    color: #332005;
+}
+
+#login_link {
+    font-family: 'Lora', sans-serif;
+    color: #332005;
+}
+
+.form-control:focus {
+    border-color: #332005;
+    box-shadow: 0 0 5px rgba(51, 32, 5);
+}
+
+h3 {
+    font: 400 50px/1.0 'Pacifico', Helvetica, sans-serif;
+    color: #332005;
+    text-shadow: 1px 1px 1px rgb(51, 32, 5), 1px 1px 0px rgb(51, 32, 5);
+}

@@ -1,0 +1,12 @@
+{
+    "python.pythonPath": "/home/joe/radius-admin/venv/bin/python",
+    "team.showWelcomeMessage": false,
+    "editor.formatOnSave": true,
+    "python.linting.pep8Enabled": true,
+    "python.linting.pylintPath": "/home/joe/radius-admin/venv/bin/pylint",
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_django"
+    ],
+    "python.linting.pylintEnabled": true
+}

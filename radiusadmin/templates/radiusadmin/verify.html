@@ -1,0 +1,70 @@
+{% extends "radiusadmin/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'radiusadmin/css/verify.css' %}" />
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'radiusadmin/js/verify.js' %}"></script>
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4 text-center" style="margin-top: auto; margin-bottom: auto;">
+        <i class="fab fa-facebook-f fa-2x"></i>
+        <i class="fab fa-twitter fa-2x"></i>
+        <i class="fab fa-pinterest fa-2x"></i>
+        <i class="fab fa-instagram fa-2x"></i>
+    </div>
+    <div class="col-sm-4 text-center">
+        <img class="img-responsive" src="{% static 'radiusadmin/images/logo.png' %}" alt="logo" />
+    </div>
+    <div class="col-sm-4 text-center" style="margin-top: auto; margin-bottom: auto;">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+
+    </div>
+    <div class="col-sm-4">
+        <div class="text-center">
+            <h3>Verify</h3>
+        </div>
+        <form id="verify_form" action="{% url 'radiusadmin:verify' %}" method="post">{% csrf_token %}
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control form-control-lg" id="password" name="password" required>
+                <small id="password" class="form-text text-muted">Enter the code you have recieved.</small>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-artcaffee">Submit</button>
+            </div>
+        </form>
+        <div class="modal" tabindex="-1" role="dialog" id="verify_modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="margin: 0 auto;">
+                        <h3 class="modal-title">Thank you</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="margin: 0 auto;">
+                        <p>Incorrect password entered.</p>
+                    </div>
+                    <div class="modal-footer" style="margin: 0 auto;">
+                        <button type="button" class="btn btn-artcaffee" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+
+    </div>
+</div>
+{% endblock %}

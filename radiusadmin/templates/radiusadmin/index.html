@@ -1,0 +1,39 @@
+{% extends "radiusadmin/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'radiusadmin/css/index.css' %}" />
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'radiusadmin/js/index.js' %}"></script>
+{% endblock %}
+
+{% block title %}Kahawa{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-5 text-center" style="margin-top: auto; margin-bottom: auto;">
+        <h3>Welcome to Kahawa Caffe</h3>
+    </div>
+    <div class="col-sm-3" id="login_div">
+        <form id="login_form" action="{% url 'radiusadmin:index' %}" method="post">{% csrf_token %}
+            <div class="text-center">
+                <img class="img-responsive" src="{% static 'radiusadmin/images/logo.png' %}" alt="logo" />
+            </div>
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="text" class="form-control form-control-lg" id="phone_number" name="phone_number" pattern="^2547[0-9]{8}$"
+                    required>
+                <small id="phone_number" class="form-text text-muted">Example: 254726791019</small>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-artcaffee">Log in</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-4">
+
+    </div>
+</div>
+{% endblock %}

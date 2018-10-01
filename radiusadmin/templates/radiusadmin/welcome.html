@@ -1,0 +1,18 @@
+{% extends "radiusadmin/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'radiusadmin/css/welcome.css' %}" />
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'radiusadmin/js/welcome.js' %}"></script>
+{% endblock %}
+
+{% block title %}Success{% endblock %}
+
+{% block content %}
+<div class="row">
+    <h3>Success</h3>
+</div>
+{% endblock %}
