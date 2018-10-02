@@ -1,10 +1,6 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from .serializers import RadcheckSerializer
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from rest_framework import status
 from .models import Radcheck
 from .generate import TOTPVerification
 
@@ -95,4 +91,9 @@ def verify(request):
 
 
 def welcome(request):
-    return render(request, 'radiusadmin/welcome.html')
+    logout_url = request.GET.get('logout_url', '')
+    continue_url = request.session['continue_url']
+    context = {
+        'logout_url': logout_url + '&' + continue_url,
+    }
+    return render(request, 'radiusadmin/welcome.html', context)
