@@ -15,21 +15,22 @@
 <div class="row">
     <div class="col-sm-12" id="login_div">
         <form id="login_form" class="centered" action="{% url 'radiusadmin:index' %}" method="post">{%csrf_token%}
-            <div class="form-group text-center">
-
-            </div>
+            <div class="form-group text-center" style="padding-top: 30px;">
+                <img class="img-responsive" src="{% static 'radiusadmin/images/cafe-logo-3.gif' %}" alt="logo" 
+                style="width: 200px;">
+            </div> 
             <div class="form-group text-center">
                 <h3> Welcome to Kahawa</h3>
             </div>
             <div class="form-group text-center">
-                <h6> Enter your phone number to enjoy free wifi. </h6>
+                <h6> Enter your phone number to enjoy our free wifi. </h6>
             </div>
             <div class="form-group row justify-content-center">
-                <div class="col-3">
-                    <label for="phone_number">Phone Number</label>
+                <div class="col-sm-3">
+                    <label for="phone_number" style="font-weight: bold;">Phone Number</label>
                     <input type="text" class="form-control" id="phone_number" name="phone_number" pattern="^2547[0-9]{8}$"
                         required>
-                    <small id="phone_number" class="form-text text-muted">Example: 254726791019</small>
+                    <small id="phone_number" class="form-text text-muted" style="font-weight: bolder;">Example: 254726791019</small>
                 </div>
             </div>
             <div class="form-check text-center">
@@ -43,11 +44,15 @@
                 <button type="submit" class="btn btn-artcaffee">Log in</button>
             </div>
             <div class="form-group text-center">
-                <a href="https://www.google.com">
-                    <img src="{% static 'radiusadmin/images/ad.jpeg' %}" alt="index_ad">
-                </a>
+                
             </div>
         </form>
     </div>
 </div>
+<br />
+<footer class="footer text-center">
+    <div class="container">
+        <h6 style="font-weight: bold; font-size: 14px;">&copy; Copyright 2018 Brandfi Kenya</h6>
+    </div>
+</footer>
 {% endblock %}

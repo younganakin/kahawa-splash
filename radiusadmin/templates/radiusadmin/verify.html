@@ -14,14 +14,9 @@
 {% block content %}
 <div class="row">
     <div class="col-sm-12">
-        <div class="row justify-content-center">
-
-        </div>
-        <div class="row justify-content-center">
-            <i class="fab fa-facebook-f fa-2x"></i>
-            <i class="fab fa-twitter fa-2x"></i>
-            <i class="fab fa-pinterest fa-2x"></i>
-            <i class="fab fa-instagram fa-2x"></i>
+        <div class="text-center" style="padding-top: 30px;">
+            <img class="img-responsive" src="{% static 'radiusadmin/images/cafe-logo-3.gif' %}" alt="logo" 
+                style="width: 200px;">
         </div>
         <br />
         <div class="row justify-content-center">
@@ -31,9 +26,9 @@
         <div class="row justify-content-center">
             <form id="verify_form" action="{% url 'radiusadmin:verify' %}" method="post">{% csrf_token %}
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password" style="font-weight: bold;">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required>
-                    <small id="password" class="form-text text-muted">Enter the code you have recieved on your
+                    <small id="password" class="form-text text-muted" style="font-weight: bolder;">Enter the code you have recieved on your
                         phone.</small>
                 </div>
                 <div class="form-group text-center">
@@ -42,10 +37,14 @@
             </form>
         </div>
         <div class="row justify-content-center">
-            <a href="https://www.google.com">
-                <img src="{% static 'radiusadmin/images/verify_ad.jpeg' %}" alt="verify_ad">
-            </a>
+            
         </div>
     </div>
 </div>
+<br />
+<footer class="footer text-center" id="footer">
+    <div class="container">
+        <h6 style="font-weight: bolder; font-size: 14px;">&copy; Copyright 2018 Brandfi Kenya</h6>
+    </div>
+</footer>
 {% endblock %}
