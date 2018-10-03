@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from .models import Radcheck
 from .generate import TOTPVerification
 
@@ -9,6 +10,7 @@ import requests
 totp_verification = TOTPVerification()
 
 
+@csrf_exempt
 def index(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -67,6 +69,7 @@ def index(request):
     return render(request, 'radiusadmin/index.html')
 
 
+@csrf_exempt
 def verify(request):
     status = ''
     if request.method == 'POST':
