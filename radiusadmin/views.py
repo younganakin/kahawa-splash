@@ -69,6 +69,7 @@ def index(request):
 
 
 def verify(request):
+    status = ''
     if request.method == 'POST':
         password = request.POST['password']
 
@@ -85,13 +86,17 @@ def verify(request):
             r = requests.post(login_url, params=login_params)
             return HttpResponseRedirect(r.url)
         else:
-            print("Denied")
-    return render(request, 'radiusadmin/verify.html')
+            status = 'error'
+            
+    context = {
+        'message': status,
+    }
+    return render(request, 'radiusadmin/verify.html', context)
 
 
 def welcome(request):
     logout_url = request.GET.get('logout_url', '')
-    continue_url = "https://www.google.com/"
+    continue_url = request.session['continue_url']
     context = {
         'logout_url': logout_url + '&' + continue_url,
     }
