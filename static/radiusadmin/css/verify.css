@@ -3,3 +3,8 @@ h3 {
     color: #332005;
     text-shadow: 1px 1px 1px rgb(51, 32, 5), 1px 1px 0px rgb(51, 32, 5);
 }
+
+.form-control:focus {
+    border-color: #332005;
+    box-shadow: 0 0 5px rgba(51, 32, 5);
+}
