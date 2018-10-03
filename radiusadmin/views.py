@@ -8,6 +8,7 @@ import requests
 
 totp_verification = TOTPVerification()
 
+
 def index(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -27,7 +28,6 @@ def index(request):
                 "message": welcome_message,
                 "recepients": phone_number
             }
-            request.session['phone_number'] = phone_number
             sms_r = requests.post(sms_url, json=sms_params, headers=headers)
         except Radcheck.DoesNotExist:
             generated_token = totp_verification.generate_token()
@@ -46,7 +46,6 @@ def index(request):
                 "message": welcome_message,
                 "recepients": phone_number
             }
-            request.session['phone_number'] = phone_number
             sms_r = requests.post(sms_url, json=sms_params, headers=headers)
         return HttpResponseRedirect(reverse('radiusadmin:verify'))
     else:
@@ -73,21 +72,19 @@ def verify(request):
     if request.method == 'POST':
         password = request.POST['password']
 
-        username = request.session['phone_number']
-        radcheck = Radcheck.objects.get(username=username)
-
-        if password == radcheck.value:
+        try:
+            radcheck = Radcheck.objects.get(value=password)
             login_url = request.session['login_url']
             success_url = 'http://' + request.get_host() + \
                 reverse('radiusadmin:welcome')
-            login_params = {"username": username,
-                            "password": password,
+            login_params = {"username": radcheck.username,
+                            "password": radcheck.value,
                             "success_url": success_url}
             r = requests.post(login_url, params=login_params)
             return HttpResponseRedirect(r.url)
-        else:
+        except Radcheck.DoesNotExist:
             status = 'error'
-            
+
     context = {
         'message': status,
     }
