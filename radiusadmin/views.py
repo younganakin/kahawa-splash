@@ -3,13 +3,11 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Radcheck
 from .generate import TOTPVerification
-from django.views.decorators.csrf import csrf_exempt
 
 import requests
 
 totp_verification = TOTPVerification()
 
-@csrf_exempt
 def index(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -70,7 +68,6 @@ def index(request):
     return render(request, 'radiusadmin/index.html')
 
 
-@csrf_exempt
 def verify(request):
     if request.method == 'POST':
         password = request.POST['password']

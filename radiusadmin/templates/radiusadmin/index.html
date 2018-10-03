@@ -14,7 +14,7 @@
 {% block content %}
 <div class="row">
     <div class="col-sm-12" id="login_div">
-        <form id="login_form" action="{% url 'radiusadmin:index' %}" method="post">
+        <form id="login_form" action="{% url 'radiusadmin:index' %}" method="post">{% csrf_token %}
             <div class="form-group text-center" style="padding-top: 30px;">
                 <img class="img-responsive" src="{% static 'radiusadmin/images/cafe-logo-3.gif' %}" alt="logo" 
                 style="width: 200px;">

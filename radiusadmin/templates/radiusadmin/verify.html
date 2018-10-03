@@ -24,7 +24,7 @@
         </div>
         <br />
         <div class="row justify-content-center">
-            <form id="verify_form" action="{% url 'radiusadmin:verify' %}" method="post">
+            <form id="verify_form" action="{% url 'radiusadmin:verify' %}" method="post">{% csrf_token %}
                 <div class="form-group">
                     <label for="password" style="font-weight: bold;">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required>
