@@ -91,7 +91,7 @@ def verify(request):
 
 def welcome(request):
     logout_url = request.GET.get('logout_url', '')
-    continue_url = request.session['continue_url']
+    continue_url = "https://www.google.com/"
     context = {
         'logout_url': logout_url + '&' + continue_url,
     }
