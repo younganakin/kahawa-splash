@@ -42,9 +42,10 @@ class Radcheck(models.Model):
     attribute = models.CharField(max_length=64)
     op = models.CharField(max_length=2)
     value = models.CharField(max_length=253)
+    code = models.CharField(max_length=10, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'radcheck'
 
 

@@ -6,50 +6,76 @@ from .models import Radcheck
 from .generate import TOTPVerification
 
 import requests
+import json
 
 totp_verification = TOTPVerification()
 
 
 @csrf_exempt
 def index(request):
+    message = ''
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
+        voucher_code = request.POST['voucher_code']
         phone_number = request.POST['phone_number']
-        try:
-            radcheck = Radcheck.objects.get(username=phone_number)
-            updated_token = totp_verification.generate_token()
-            radcheck.value = updated_token
-            radcheck.save()
 
-            headers = {'Content-type': 'application/json'}
-            sms_url = 'http://pay.brandfi.co.ke:8301/sms/send'
-            welcome_message = 'Welcome, your access code to get online is ' + \
-                updated_token
-            sms_params = {
-                "clientId": "2",
-                "message": welcome_message,
-                "recepients": phone_number
-            }
-            sms_r = requests.post(sms_url, json=sms_params, headers=headers)
-        except Radcheck.DoesNotExist:
-            generated_token = totp_verification.generate_token()
-            headers = {'Content-type': 'application/json'}
-            radcheck = Radcheck(username=phone_number,
-                                attribute='Cleartext-Password',
-                                op=':=',
-                                value=generated_token)
-            radcheck.save()
+        voucher_url = 'http://178.62.86.105/validate'
+        voucher_params = {
+            "code": voucher_code
+        }
+        voucher_r = requests.post(
+            voucher_url,
+            params=voucher_params)
+        parsed_json = json.loads(voucher_r.text)
+        message = parsed_json['message']
 
-            sms_url = 'http://pay.brandfi.co.ke:8301/sms/send'
-            welcome_message = 'Welcome, your access code to get online is ' + \
-                generated_token
-            sms_params = {
-                "clientId": "2",
-                "message": welcome_message,
-                "recepients": phone_number
+        if message == 'success':
+            try:
+                radcheck = Radcheck.objects.get(username=phone_number)
+                updated_token = totp_verification.generate_token()
+                radcheck.value = updated_token
+                radcheck.code = voucher_code
+                radcheck.save()
+
+                headers = {'Content-type': 'application/json'}
+                sms_url = 'http://pay.brandfi.co.ke:8301/sms/send'
+                welcome_message = 'Online access code is: ' + updated_token
+                sms_params = {
+                    "clientId": "2",
+                    "message": welcome_message,
+                    "recepients": phone_number
+                }
+                sms_r = requests.post(
+                    sms_url,
+                    json=sms_params,
+                    headers=headers)
+            except Radcheck.DoesNotExist:
+                generated_token = totp_verification.generate_token()
+                headers = {'Content-type': 'application/json'}
+                radcheck = Radcheck(username=phone_number,
+                                    attribute='Cleartext-Password',
+                                    op=':=',
+                                    value=generated_token,
+                                    code=voucher_code)
+                radcheck.save()
+
+                sms_url = 'http://pay.brandfi.co.ke:8301/sms/send'
+                welcome_message = 'Online access code is: ' + generated_token
+                sms_params = {
+                    "clientId": "2",
+                    "message": welcome_message,
+                    "recepients": phone_number
+                }
+                sms_r = requests.post(
+                    sms_url,
+                    json=sms_params,
+                    headers=headers)
+            return HttpResponseRedirect(reverse('radiusadmin:verify'))
+        else:
+            context = {
+                'message': message,
             }
-            sms_r = requests.post(sms_url, json=sms_params, headers=headers)
-        return HttpResponseRedirect(reverse('radiusadmin:verify'))
+            return render(request, 'radiusadmin/index.html',  context)
     else:
         login_url = request.GET.get('login_url', '')
         continue_url = request.GET.get('continue_url', '')
@@ -66,7 +92,11 @@ def index(request):
         request.session['ap_tags'] = ap_tags
         request.session['client_ip'] = client_ip
         request.session['client_mac'] = client_mac
-    return render(request, 'radiusadmin/index.html')
+
+        context = {
+            'message': message,
+        }
+    return render(request, 'radiusadmin/index.html',  context)
 
 
 @csrf_exempt
@@ -77,6 +107,16 @@ def verify(request):
 
         try:
             radcheck = Radcheck.objects.get(value=password)
+
+            valid_url = 'http://178.62.86.105/update'
+            valid_params = {"code": radcheck.code,
+                            "additional_info": radcheck.username}
+            valid_r = requests.post(
+                valid_url,
+                params=valid_params)
+
+            print(valid_r.status_code)
+
             login_url = request.session['login_url']
             success_url = 'http://' + request.get_host() + \
                 reverse('radiusadmin:welcome')

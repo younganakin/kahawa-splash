@@ -14,7 +14,7 @@
 {% block content %}
 <div class="row">
     <div class="col-sm-12" id="login_div">
-        <form id="login_form" action="{% url 'radiusadmin:index' %}" method="post">{% csrf_token %}
+        <form id="login_form" action="{% url 'radiusadmin:index' %}" method="post">
             <div class="form-group text-center" style="padding-top: 30px;">
                 <img class="img-responsive" src="{% static 'radiusadmin/images/cafe-logo-3.gif' %}" alt="logo" style="width: 200px;">
             </div>
@@ -22,7 +22,20 @@
                 <h3> Welcome to Kahawa</h3>
             </div>
             <div class="form-group text-center">
-                <h6> Enter your phone number to enjoy our free wifi. </h6>
+                <h6> Enter your voucher code and phone number to enjoy our free wifi. </h6>
+            </div>
+            {% if message == 'fail' %}
+            <div class="row justify-content-center">
+                <div class="alert alert-danger">
+                    <strong>You entered an invalid voucher code.</strong>
+                </div>
+            </div>
+            {% endif %}
+            <div class="form-group row justify-content-center">
+                <div class="col-sm-3">
+                    <label for="voucher_code" style="font-weight: bold;">Voucher Code</label>
+                    <input type="text" class="form-control" id="voucher_code" name="voucher_code" required>
+                </div>
             </div>
             <div class="form-group row justify-content-center">
                 <div class="col-sm-3">
