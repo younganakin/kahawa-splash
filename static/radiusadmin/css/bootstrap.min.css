@@ -10003,8 +10003,8 @@ a.text-dark:hover {
 /*# sourceMappingURL=bootstrap.min.css.map */
 .btn-artcaffee {
     color: #ffffff;
-    background-color: #332005;
-    border-color: #332005;
+    background-color: #333;
+    border-color: #333;
 }
 
 .btn-artcaffee:hover,
@@ -10013,8 +10013,8 @@ a.text-dark:hover {
 .btn-artcaffee.active,
 .open .dropdown-toggle.btn-artcaffee {
     color: #ffffff;
-    background-color: #332005;
-    border-color: #332005;
+    background-color: #333;
+    border-color: #333;
 }
 
 .btn-artcaffee:active,
@@ -10038,11 +10038,11 @@ fieldset[disabled] .btn-artcaffee:active,
 .btn-artcaffee.disabled.active,
 .btn-artcaffee[disabled].active,
 fieldset[disabled] .btn-artcaffee.active {
-    background-color: #332005;
-    border-color: #332005;
+    background-color: #333;
+    border-color: #333;
 }
 
 .btn-artcaffee .badge {
-    color: #332005;
+    color: #333;
     background-color: #ffffff;
 }
