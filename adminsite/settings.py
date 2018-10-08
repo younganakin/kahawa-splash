@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1',
 INSTALLED_APPS = [
     'radiusadmin.apps.RadiusadminConfig',
     'kahawa.apps.KahawaConfig',
+    'java.apps.JavaConfig',
     'rest_framework',
     'django_otp',
     'django_otp.plugins.otp_totp',
