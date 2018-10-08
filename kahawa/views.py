@@ -19,9 +19,9 @@ def index(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         phone_number = request.POST['phone_number']
-        ap_mac = request.session['ap_mac']
+        client_mac = request.session['client_mac']
         try:
-            username = phone_number + ap_mac
+            username = phone_number + client_mac
             radcheck = Radcheck.objects.get(
                 username=username,
                 organization='kahawa')
@@ -44,13 +44,13 @@ def index(request):
         except Radcheck.DoesNotExist:
             generated_token = totp_verification.generate_token()
             headers = {'Content-type': 'application/json'}
-            username = phone_number + ap_mac
+            username = phone_number + client_mac
             radcheck = Radcheck(username=username,
                                 attribute='Cleartext-Password',
                                 op=':=',
                                 value=generated_token,
                                 phone_number=phone_number,
-                                mac_address=ap_mac,
+                                mac_address=client_mac,
                                 organization='kahawa')
             radcheck.save()
 
