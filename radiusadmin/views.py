@@ -31,7 +31,10 @@ def index(request):
 
         if message == 'success':
             try:
-                radcheck = Radcheck.objects.get(username=phone_number)
+                ap_mac = request.session['ap_mac']
+                username = phone_number + ap_mac
+                radcheck = Radcheck.objects.get(username=username,
+                                                organization='java')
                 updated_token = totp_verification.generate_token()
                 radcheck.value = updated_token
                 radcheck.code = voucher_code
@@ -52,11 +55,14 @@ def index(request):
             except Radcheck.DoesNotExist:
                 generated_token = totp_verification.generate_token()
                 headers = {'Content-type': 'application/json'}
-                radcheck = Radcheck(username=phone_number,
+                username = phone_number + ap_mac
+                radcheck = Radcheck(username=username,
                                     attribute='Cleartext-Password',
                                     op=':=',
                                     value=generated_token,
-                                    code=voucher_code)
+                                    phone_number=phone_number,
+                                    mac_address=ap_mac,
+                                    organization='java')
                 radcheck.save()
 
                 sms_url = 'http://pay.brandfi.co.ke:8301/sms/send'

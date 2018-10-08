@@ -43,6 +43,9 @@ class Radcheck(models.Model):
     op = models.CharField(max_length=2)
     value = models.CharField(max_length=253)
     code = models.CharField(max_length=10, null=True)
+    phone_number = models.CharField(max_length=64, null=True)
+    mac_address = models.CharField(max_length=64, null=True)
+    organization = models.CharField(max_length=64, null=True)
 
     class Meta:
         managed = True

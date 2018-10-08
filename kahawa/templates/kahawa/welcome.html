@@ -1,0 +1,43 @@
+{% extends "radiusadmin/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'radiusadmin/css/welcome.css' %}" />
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'radiusadmin/js/welcome.js' %}"></script>
+{% endblock %}
+
+{% block title %}Java Coffee House-Success{% endblock %}
+
+{% block content %}
+<div class="row" style="padding-top: 30px;">
+    <div class="col-sm-4 text-center">
+
+    </div>
+    <div class="col-sm-4 text-center">
+        <img class="img-responsive" src="{% static 'radiusadmin/images/logo.svg' %}" alt="logo" style="width: 200px;">
+        <div class="row justify-content-center">
+            <h3>You are now online</h3>
+        </div>
+        <br />
+        <div class="row justify-content-center">
+            <a href="{{ browse_url }}" class="btn btn-artcaffee" role="button">BROWSE</a>
+        </div>
+        <br />
+        <div class="row justify-content-center">
+
+        </div>
+    </div>
+    <div class="col-sm-4">
+
+    </div>
+</div>
+<br />
+<footer class="footer text-center" id="footer">
+    <div class="container">
+        <h6 style="font-weight: bold; font-size: 14px;">&copy; Copyright 2018 Brandfi Kenya</h6>
+    </div>
+</footer>
+{% endblock %}
