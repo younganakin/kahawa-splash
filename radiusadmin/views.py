@@ -60,6 +60,7 @@ def index(request):
                                     attribute='Cleartext-Password',
                                     op=':=',
                                     value=generated_token,
+                                    code=voucher_code,
                                     phone_number=phone_number,
                                     mac_address=client_mac,
                                     organization='java')
@@ -120,8 +121,6 @@ def verify(request):
             valid_r = requests.post(
                 valid_url,
                 params=valid_params)
-
-            print(valid_r.status_code)
 
             login_url = request.session['login_url']
             success_url = 'http://' + request.get_host() + \
