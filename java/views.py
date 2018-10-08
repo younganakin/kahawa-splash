@@ -16,7 +16,7 @@ def index(request):
         client_mac = request.session['client_mac']
         try:
             radcheck = Radcheck.objects.get(
-                username=client_mac + voucher_code,
+                mac_address=client_mac,
                 organization='java-voucher')
             radcheck.value = voucher_code
             radcheck.save()
