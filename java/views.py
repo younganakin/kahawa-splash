@@ -1,7 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
@@ -18,53 +15,26 @@ totp_verification = TOTPVerification()
 def index(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        phone_number = request.POST['phone_number']
+        voucher_code = request.POST['voucher_code']
         client_mac = request.session['client_mac']
         try:
-            username = phone_number + client_mac
+            username = client_mac
             radcheck = Radcheck.objects.get(
-                mac_address=client_mac,
+                username=username,
                 organization='kahawa')
             updated_token = totp_verification.generate_token()
             radcheck.value = updated_token
             radcheck.save()
-
-            headers = {'Content-type': 'application/json'}
-            sms_url = 'http://pay.brandfi.co.ke:8301/sms/send'
-            welcome_message = 'Online access code is: ' + updated_token
-            sms_params = {
-                "clientId": "2",
-                "message": welcome_message,
-                "recepients": phone_number
-            }
-            sms_r = requests.post(
-                sms_url,
-                json=sms_params,
-                headers=headers)
         except Radcheck.DoesNotExist:
             generated_token = totp_verification.generate_token()
-            headers = {'Content-type': 'application/json'}
-            username = phone_number + client_mac
+            username = client_mac
             radcheck = Radcheck(username=username,
                                 attribute='Cleartext-Password',
                                 op=':=',
                                 value=generated_token,
-                                phone_number=phone_number,
                                 mac_address=client_mac,
                                 organization='kahawa')
             radcheck.save()
-
-            sms_url = 'http://pay.brandfi.co.ke:8301/sms/send'
-            welcome_message = 'Online access code is: ' + generated_token
-            sms_params = {
-                "clientId": "2",
-                "message": welcome_message,
-                "recepients": phone_number
-            }
-            sms_r = requests.post(
-                sms_url,
-                json=sms_params,
-                headers=headers)
         return HttpResponseRedirect(reverse('kahawa:verify'))
     else:
         login_url = request.GET.get('login_url', '')
@@ -88,7 +58,6 @@ def index(request):
 
 @csrf_exempt
 def verify(request):
-    status = ''
     if request.method == 'POST':
         password = request.POST['password']
 

@@ -33,7 +33,7 @@ def index(request):
             try:
                 client_mac = request.session['client_mac']
                 username = phone_number + client_mac
-                radcheck = Radcheck.objects.get(username=username,
+                radcheck = Radcheck.objects.get(mac_address=client_mac,
                                                 organization='java')
                 updated_token = totp_verification.generate_token()
                 radcheck.value = updated_token
