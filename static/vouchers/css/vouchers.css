@@ -9,8 +9,10 @@ p {
     font-weight: bolder;
 }
 
-table,
-th,
 td {
+    border: 2px dotted black;
+}
+
+tr {
     border: 2px dotted black;
 }
