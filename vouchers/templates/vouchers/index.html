@@ -1,0 +1,32 @@
+{% extends "vouchers/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'vouchers/css/index.css' %}" />
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block title %}Java Coffee House Vouchers{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row justify-content-center">
+            <img class="img-responsive" src="{% static 'java/images/logo.svg' %}" alt="logo" style="width: 200px;">
+        </div>
+        <div class="row justify-content-center">
+            <a href="{{ download_url }}" class="btn btn-artcaffee" role="button">DOWNLOAD VOUCHERS</a>
+        </div>
+        <br />
+        <div class="row justify-content-center">
+            <footer class="footer text-center">
+                <div class="container">
+                    <h6 style="font-weight: bold; font-size: 14px;">&copy; Copyright 2018 Java House</h6>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+{% endblock %}

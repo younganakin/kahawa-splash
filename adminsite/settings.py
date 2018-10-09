@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'radiusadmin.apps.RadiusadminConfig',
     'kahawa.apps.KahawaConfig',
     'java.apps.JavaConfig',
+    'vouchers.apps.VouchersConfig',
     'rest_framework',
     'django_otp',
     'django_otp.plugins.otp_totp',

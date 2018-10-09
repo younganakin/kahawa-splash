@@ -1,0 +1,119 @@
+{% extends "vouchers/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'vouchers/css/vouchers.css' %}" />
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block title %}Java Coffee House Vouchers{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table-responsive">
+            <tr>
+                {% for code in voucher_codes_1 %}
+                <td>
+                    <div class="col-sm-12 text-center">
+                        <img class="img-responsive" src="{% static 'java/images/logo.svg' %}" alt="logo" style="width: 200px;">
+                        <p>Voucher code: {{ code }}</p>
+                        <h6>Thank you for visiting Java House</h6>
+                    </div>
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for code in voucher_codes_2 %}
+                <td>
+                    <div class="col-sm-12 text-center">
+                        <img class="img-responsive" src="{% static 'java/images/logo.svg' %}" alt="logo" style="width: 200px;">
+                        <p>Voucher code: {{ code }}</p>
+                        <h6>Thank you for visiting Java House</h6>
+                    </div>
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for code in voucher_codes_3 %}
+                <td>
+                    <div class="col-sm-12 text-center">
+                        <img class="img-responsive" src="{% static 'java/images/logo.svg' %}" alt="logo" style="width: 200px;">
+                        <p>Voucher code: {{ code }}</p>
+                        <h6>Thank you for visiting Java House</h6>
+                    </div>
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for code in voucher_codes_4 %}
+                <td>
+                    <div class="col-sm-12 text-center">
+                        <img class="img-responsive" src="{% static 'java/images/logo.svg' %}" alt="logo" style="width: 200px;">
+                        <p>Voucher code: {{ code }}</p>
+                        <h6>Thank you for visiting Java House</h6>
+                    </div>
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for code in voucher_codes_5 %}
+                <td>
+                    <div class="col-sm-12 text-center">
+                        <img class="img-responsive" src="{% static 'java/images/logo.svg' %}" alt="logo" style="width: 200px;">
+                        <p>Voucher code: {{ code }}</p>
+                        <h6>Thank you for visiting Java House</h6>
+                    </div>
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for code in voucher_codes_6 %}
+                <td>
+                    <div class="col-sm-12 text-center">
+                        <img class="img-responsive" src="{% static 'java/images/logo.svg' %}" alt="logo" style="width: 200px;">
+                        <p>Voucher code: {{ code }}</p>
+                        <h6>Thank you for visiting Java House</h6>
+                    </div>
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for code in voucher_codes_7 %}
+                <td>
+                    <div class="col-sm-12 text-center">
+                        <img class="img-responsive" src="{% static 'java/images/logo.svg' %}" alt="logo" style="width: 200px;">
+                        <p>Voucher code: {{ code }}</p>
+                        <h6>Thank you for visiting Java House</h6>
+                    </div>
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for code in voucher_codes_8 %}
+                <td>
+                    <div class="col-sm-12 text-center">
+                        <img class="img-responsive" src="{% static 'java/images/logo.svg' %}" alt="logo" style="width: 200px;">
+                        <p>Voucher code: {{ code }}</p>
+                        <h6>Thank you for visiting Java House</h6>
+                    </div>
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for code in voucher_codes_9 %}
+                <td>
+                    <div class="col-sm-12 text-center">
+                        <img class="img-responsive" src="{% static 'java/images/logo.svg' %}" alt="logo" style="width: 200px;">
+                        <p>Voucher code: {{ code }}</p>
+                        <h6>Thank you for visiting Java House</h6>
+                    </div>
+                </td>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

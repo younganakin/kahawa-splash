@@ -20,5 +20,6 @@ urlpatterns = [
     path('radiusadmin/', include('radiusadmin.urls')),
     path('kahawa/', include('kahawa.urls')),
     path('java/', include('java.urls')),
+    path('vouchers/', include('vouchers.urls')),
     path('admin/', admin.site.urls),
 ]
