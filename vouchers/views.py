@@ -40,7 +40,6 @@ def generate_codes(request):
     voucher_params_7 = {"numbers": 4}
     voucher_params_8 = {"numbers": 4}
     voucher_params_9 = {"numbers": 4}
-    voucher_params_10 = {"numbers": 4}
     r_1 = requests.get(voucher_url, params=voucher_params_1)
     r_2 = requests.get(voucher_url, params=voucher_params_2)
     r_3 = requests.get(voucher_url, params=voucher_params_3)
